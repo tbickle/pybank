@@ -26,7 +26,7 @@ def main() :
 
 	try:
 
-		pwd = "/home/chasemat/bank/proc_data/"
+		pwd = "/home/chasemat/bank/data/proc_data/"
 
 		files = []
 		oldfiles = [f for f in glob.glob(pwd + "*.csv")]

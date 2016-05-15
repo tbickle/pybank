@@ -23,7 +23,7 @@ class merged() :
 
 def main():
 
-	pwd = "/home/chasemat/bank/proc_data/"
+	pwd = "/home/chasemat/bank/data/proc_data/"
 	files = []
 	files = [f for f in glob.glob(pwd + "*.csv")]
 	files = [f.replace(pwd, "") for f in files]
