@@ -1,1 +1,25 @@
-asdf
+* Make parent directory in $HOME/bank. Create the following structure:
+	__bank__
+	|	|
+	pybank	|_____data_______
+		|		|
+		raw_data	|___________proc_data___________
+				|	|	|	|	|
+				lvl0	lvl1	lvl2	lvl3	lvl4
+
+* Collect data from bank website. Place these files in $HOME/bank/data/raw_data
+
+* (Optional) Establish links in parent directory to README and INSTRUCTIONS
+	$ cd $HOME/bank
+	$ ln ./pybank/README
+	$ ln ./pybank/INSTRUCTIONS
+
+* Run through usage process in the following order:
+	1) rename_files.py			# the output will be in data/proc_data/lvl0
+	2) compile_data.py			# the output will be in data/proc_data/lvl1
+	3) assign_cat.py			# the output will be in data/proc_data/lvl2
+	4) 
+	      a) $ cp ./data/proc_data/lvl2 ./data/proc_data/lvl3
+	      a) MANUAL CATEGORY ASSIGNMENT	# the output will be in data/proc_data/lvl3
+	5) sort_cat.py				# the output will be in data/proc_data/lvl4
+

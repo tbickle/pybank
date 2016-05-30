@@ -1,8 +1,32 @@
+#!/usr/bin python
+
+####################################################################
+#
+# Description:
+# xxx
+#
+# USAGE:
+# First run rename_file.py process
+# Select user parameters
+# $ cd $HOME/bank
+# $ rm ./data/proc_data/lvl1/*
+# $ python ./pybank/compile_data.py
+# $ ls -l ./data/proc_data/lvl1/
+# $ libreoffice --calc ./data/proc_data/lvl1/201505_1.csv
+#
+####################################################################
+
 from __future__ import print_function
 from setuptools import setup
 import sys
 import glob
 import os
+
+##################################################################################
+# User Selectable Parameters
+##################################################################################
+
+fwrite = 1	# write to file?
 
 ##################################################################################
 
@@ -23,12 +47,13 @@ class merged() :
 
 def main():
 
-	pwd = "/home/chasemat/bank/data/proc_data/"
+	pwd = "/home/chasemat/bank/data/proc_data/lvl0/"
 	files = []
 	files = [f for f in glob.glob(pwd + "*.csv")]
 	files = [f.replace(pwd, "") for f in files]
-	files = [f for f in files if len(f)==10 and (f[0]+f[1]+f[2])=="201"]
-	#print(files)
+	#files = [f for f in files if len(f)==10 and (f[0]+f[1]+f[2])=="201"]
+	files = [f for f in files if len(f)==12 and (f[0]+f[1]+f[2])=="201"]
+	print(files)
 
 ##################################################
 
@@ -136,16 +161,33 @@ def main():
 
 ##################################################
 
-	if 1:
+	if fwrite==0:
 		for mm in reduced_months:
 			print("")
 			print(mm.name)
 			for i in range(len(mm.payee)):
-				print(mm.payee[i] + "," + str(mm.cost[i]))
+				out = mm.payee[i] + "," + str(mm.cost[i]) + "\n"
+				print(out,end="")
+	if fwrite:
+		for mm in reduced_months:
+			pwd = "/home/chasemat/bank/data/proc_data/lvl1/"
+			filename = mm.name[-12:-6] + "_1" + mm.name[-4:]
+			filepath = pwd + filename
+
+			print("")
+			print(mm.name)
+			print(filepath)
+
+			with open(filepath,"w") as f:
+				for i in range(len(mm.payee)):
+					out = mm.payee[i] + "," + str(mm.cost[i]) + "\n"
+					print(out,end="")
+					f.write(out)
+
+##################################################
 
 	exit()
 
 if __name__ == '__main__' :
 	main()
 	print("Done")
-

@@ -5,13 +5,15 @@
 # Description:
 # xxx
 #
-# usage:
-# $ cd <>/bank
-# $ sudo rm ./proc_data/*
-# $ cp ./raw_data/* ./proc_data
-# $ sudo chmod 664 ./proc_data/*
-# $ rm ./proc_data/currentTransaction*
-# $ python3 rename_files.py
+# USAGE:
+# $ cd $HOME/bank
+# $ rm ./data/proc_data/lvl0/*
+# $ cp ./data/raw_data/* ./data/proc_data/lvl0/
+# $ chmod 664 ./data/proc_data/lvl0/*
+# $ rm ./data/proc_data/lvl0/currentTransaction*
+# $ python ./pybank/rename_files.py
+# $ ls -l ./data/proc_data/lvl0/
+# $ libreoffice --calc ./data/proc_data/lvl0/201505_0.csv
 #
 ####################################################################
 
@@ -26,7 +28,7 @@ def main() :
 
 	try:
 
-		pwd = "/home/chasemat/bank/data/proc_data/"
+		pwd = "/home/chasemat/bank/data/proc_data/lvl0/"
 
 		files = []
 		oldfiles = [f for f in glob.glob(pwd + "*.csv")]
@@ -54,7 +56,8 @@ def main() :
 
 				curr = curr[:-9]			# remove junk from tail
 				curr = curr[2:]+curr[:2]		# swap month and year
-				curr = pwd + curr + ".csv"
+				#curr = pwd + curr + ".csv"
+				curr = pwd + curr + "_0.csv"		# level 0 folder
 
 				oldname = o
 				newname = curr

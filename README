@@ -1,1 +1,19 @@
-asdf
+Python code used to analyze spreadsheet data from my bank.
+
+Note procedure under INSTRUCTIONS.
+
+Current categories:
+1)	food, hygiene, house, etc
+2)	car: gas, insur, repair, etc
+3)	bills: rent, internet, etc
+4)	workout, dental, doctor
+5)	work
+6)	else
+
+Data levels:
+lvl0	Renamed files from bank website
+lvl1	Multiple payee references consolidated into 1 monthly total
+lvl2	Payees assigned categories (automatic)
+lvl3	Payees assigned categories (manual)
+lvl4	Multiple category references consolidated into 1 monthy total
+
