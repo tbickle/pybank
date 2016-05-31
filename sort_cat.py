@@ -9,12 +9,13 @@
 # CAUTION...BE SURE NOT TO DELETE DESIRED DATA
 # First run rename_file.py process
 # Next run compile_data.py process
+# Next run assign_cat.py process
 # Select user parameters
 # $ cd $HOME/bank
-# $ rm ./data/proc_data/lvl2/*
-# $ python ./pybank/sortcat.py
-# $ ls -l ./data/proc_data/lvl2/
-# $ libreoffice --calc ./data/proc_data/lvl2/201505_2.csv
+# $ rm ./data/proc_data/lvl4/*
+# $ python ./pybank/sort_cat.py
+# $ ls -l ./data/proc_data/lvl4/
+# $ libreoffice --calc ./data/proc_data/lvl4/201505_4.csv
 #
 ####################################################################
 
@@ -25,10 +26,17 @@ import glob
 import os
 
 ##################################################################################
+# User Selectable Parameters
+##################################################################################
+
+fwrite = 1	# write to file?
+
+##################################################################################
 
 class category() :
-	def __init__(self, name, c1, c2, c3, c4, c5, c6) :
+	def __init__(self, name, c0, c1, c2, c3, c4, c5, c6) :
 		self.name = name		# month filename
+		self.c0 = c0
 		self.c1 = c1
 		self.c2 = c2
 		self.c3 = c3
@@ -40,7 +48,7 @@ class category() :
 
 def main():
 
-	pwd = "/home/chasemat/bank/data/proc_data/lvl2/"
+	pwd = "/home/chasemat/bank/data/proc_data/lvl3/"
 	files = []
 	try:
 		files = [f for f in glob.glob(pwd + "*.csv")]
@@ -57,9 +65,16 @@ def main():
 	months = []
 	for f in files:
 		content = []
-		cat = category(pwd+f, 0, 0, 0, 0, 0, 0)
+
+		oldfilepath = pwd+f
+
+		newpwd = "/home/chasemat/bank/data/proc_data/lvl4/"
+		newfilename = f[-12:-6] + "_4" + f[-4:]
+		newfilepath = newpwd+newfilename
+	
+		cat = category(newfilepath, 0, 0, 0, 0, 0, 0, 0)
 		try :
-			with open(cat.name, "r") as ctnt:
+			with open(oldfilepath, "r") as ctnt:
 				for c in ctnt:
 					content += [c]
 		except :
@@ -81,11 +96,13 @@ def main():
 				else:
 					#print(tmp1[0] + "," + tmp1[1] + "," + tmp1[2], end="")
 					x = int(tmp1[2])		# category
-					if x==1 or x==2 or x==3 or x==4 or x==5 or x==6:
+					if x==0 or x==1 or x==2 or x==3 or x==4 or x==5 or x==6:
 						# sort categories
 						#print(tmp1[1] + "," + tmp1[2], end="")
 						z = float(tmp1[1])	# spent
-						if x==1:
+						if x==0:
+							cat.c0 += z
+						elif x==1:
 							cat.c1 += z
 						elif x==2:
 							cat.c2 += z
@@ -100,82 +117,44 @@ def main():
 						else:
 							print(tmp1[2] + ": Not a category")
 							pass
-						print(str(x) + ", " + str(z))
+						#print(str(x) + ", " + str(z))
 					else:
 						print(tmp1[0] + ": Not a category")
 						pass
 			except:
-				if(tmp1[0]):
-					print(tmp1[0])
-					cat.name = tmp1[0]
+				print("Error")
 				pass
 
-			months += [cat]
+		months += [cat]
 
-		exit()	# TEST ONLY
-
-##################################################
-"""
-	if 0:
-		try:
-			for m in months:
-				print("c1: " + str(m.c1))
-		except:
-			print("Unexpected error:" + sys.exc_info()[0])
-			raise
-
-	exit()
-##################################################
-
-	reduced_months = []
-	for m in months:
-		# search and identify duplicate payees
-		merge = []
-		log = []
-
-		for i in range(len(m.payee)):
-
-			dupl = False
-			# first search if payee has already been logged
-			for mm in log:
-				if m.payee[i]==mm:
-					dupl=True
-
-			# if not logged, proceed to search for duplicates
-			if not dupl:
-				total = m.cost[i]
-				for j in range(len(m.payee)):
-					if j<=i:	# make sure we're not double counting
-						pass
-					else:
-						if m.payee[i]==m.payee[j]:
-							total += m.cost[j]
-
-				merge += [m.payee[i] + "," + str(total)]
-				log += [m.payee[i]]
-		
-		consolidated = merge
-
-		# MERGED(): making new object of consolidated data
-		mm = merged(m.name, [], [])
-		for c in consolidated:
-			cc = c.split(",")
-			mm.payee += [cc[0]]
-			mm.cost += [float(cc[1])]
-
-		reduced_months += [mm]
+		#exit()	# TEST ONLY
 
 ##################################################
-
 	if 1:
-		for mm in reduced_months:
-			print("")
-			print(mm.name)
-			for i in range(len(mm.payee)):
-				print(mm.payee[i] + "," + str(mm.cost[i]))
+
+		for m in months:
+			filepath = m.name
+
+			output = ""
+			output += "0, " + str(m.c0) + "\n"
+			output += "1, " + str(m.c1) + "\n"
+			output += "2, " + str(m.c2) + "\n"
+			output += "3, " + str(m.c3) + "\n"
+			output += "4, " + str(m.c4) + "\n"
+			output += "5, " + str(m.c5) + "\n"
+			output += "6, " + str(m.c6) + "\n"
+
+			print(filepath)
+			print(output)
+
+			if fwrite:
+				with open(filepath,"w") as f:
+					f.write(output)
+
+##################################################
 
 	exit()
-"""
+
 if __name__ == '__main__' :
 	main()
 	print("Done")

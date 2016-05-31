@@ -24,7 +24,7 @@ Current categories:
 4)	 HEALTH: workout, dental, doctor, vet
 5)	 TRAVEL: plane, uber, hotel
 6)	CLOTHES: rei, american apparel
-5)	ELSE	
+0)	UNIDENTIFIED
 """
 ####################################################################
 
@@ -47,12 +47,13 @@ Cat1 = ["food","restaurant","thai","india","cafe","brew","coffee",
 	"middle east","caffe","chicken","ethiopian","market","grill",
 	"pollo","table","tavern","burger","liquor","taco","baguette",
 	"boba","tea","petco","trader","sandwich","pet ","cream","vons",
-	"starbucks"]
-Cat2 = ["car ","auto","gas","fuel","insurance","repair","exxon","chevron","shell"]
+	"starbucks","bakery","ralphs","culinart","jimmy johns","mediterranean"]
+Cat2 = ["car ","auto","gas","fuel","insurance","repair","exxon",
+	"chevron","shell","parking","lube","valoline"]
 Cat3 = ["internet","cable"]
 Cat4 = ["bikram","pilates","dental","vca"]
 Cat5 = ["fly","airline","uber","hampton inn","airport","delta"]
-Cat6 = ["rei ","apparel"]
+Cat6 = ["rei ","apparel","north face","new balance","vans"]
 
 class Categories():
 	def __init__(self, fname, out):

@@ -3,12 +3,13 @@ Python code used to analyze spreadsheet data from my bank.
 Note procedure under INSTRUCTIONS.
 
 Current categories:
-1)	food, hygiene, house, etc
-2)	car: gas, insur, repair, etc
-3)	bills: rent, internet, etc
-4)	workout, dental, doctor
-5)	work
-6)	else
+1)	   FOOD: restaurant, grocery, pet food
+2)	    CAR: gas, insur, repair, etc
+3)	  BILLS: rent, internet, etc
+4)	 HEALTH: workout, dental, doctor, vet
+5)	 TRAVEL: plane, uber, hotel
+6)	CLOTHES: rei, american apparel
+0)	UNIDENTIFIED
 
 Data levels:
 lvl0	Renamed files from bank website

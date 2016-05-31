@@ -19,7 +19,9 @@
 	2) compile_data.py			# the output will be in data/proc_data/lvl1
 	3) assign_cat.py			# the output will be in data/proc_data/lvl2
 	4) 
-	      a) $ cp ./data/proc_data/lvl2 ./data/proc_data/lvl3
-	      a) MANUAL CATEGORY ASSIGNMENT	# the output will be in data/proc_data/lvl3
+	      a) $ cp ./data/proc_data/lvl2/* ./data/proc_data/lvl3
+	      b) $ python ./pybank/lvl3_rename.py
+	      c) $ ls -l ./data/proc_data/lvl3
+	      c) MANUAL CATEGORY ASSIGNMENT	# the output will be in data/proc_data/lvl3
 	5) sort_cat.py				# the output will be in data/proc_data/lvl4
 
